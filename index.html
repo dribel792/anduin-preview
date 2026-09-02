@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>Anduin — Finance, converged</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%2306080f%22/%3E%3Cg%20fill%3D%22%23e8ecf6%22%3E%3Cpath%20d%3D%22M14.55%2028%20C14.55%2019.5%2015.35%2013.5%2015.75%207.2%20L16.25%207.2%20C16.65%2013.5%2017.45%2019.5%2017.45%2028%20Z%22/%3E%3Cpath%20d%3D%22M6.7%2028%20C8.1%2021.5%2011.7%2015.6%2015.45%209.2%20L16.05%2010.05%20C12.0%2015.8%209.75%2021.6%209.1%2028%20Z%22/%3E%3Cpath%20d%3D%22M25.3%2028%20C23.9%2021.5%2020.3%2015.6%2016.55%209.2%20L15.95%2010.05%20C20.0%2015.8%2022.25%2021.6%2022.9%2028%20Z%22/%3E%3C/g%3E%3C/svg%3E" />
-<meta name="description" content="Anduin issues leveraged financial products — knock-out certificates referencing the world's most liquid markets. Base prospectus under review." />
+<meta name="description" content="Anduin issues leveraged financial products as transferable tokens — knock-out certificates you can hold in your own wallet. Base prospectus under review." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet" />
@@ -593,7 +593,7 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
 .pillars {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
   gap: 14px;
   margin-top: clamp(38px, 4.5vw, 56px);
 }
@@ -644,7 +644,7 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 }
 .mech-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
   gap: 2px 26px;
   margin: 0;
   padding: 10px 0 0;
@@ -732,7 +732,7 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
     <span class="watermark" aria-hidden="true">ANDUIN</span>
     <div class="tagline">
       <h1 class="hero-line">Finance, converged.</h1>
-      <p class="hero-sub">Anduin issues leveraged financial products &mdash; certificates that reference the world&rsquo;s most liquid markets.</p>
+      <p class="hero-sub">Anduin issues leveraged financial products as transferable tokens &mdash; a derivative position you hold in your own wallet.</p>
     </div>
     <a class="scroll-cue" href="#product">
       <span>What we issue</span>
@@ -772,12 +772,13 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 <section class="explain" id="product">
   <div class="explain-inner">
     <p class="eyebrow">Leverage Product Issuance</p>
-    <h2>Leverage, issued as a security.</h2>
+    <h2>Leverage, issued as a transferable token.</h2>
     <p class="explain-lead">
-      Anduin issues knock-out certificates: transferable securities that give
-      geared exposure to a reference market, with the most you can lose fixed
-      at the amount you paid. Everything that governs the certificate &mdash; the
-      reference, the barrier, the costs &mdash; is written down before it is issued.
+      Anduin issues knock-out certificates as tokens: securities that give geared
+      exposure to a reference market, with the most you can lose fixed at the
+      amount you paid. Every series is issued on-chain, so a derivative position
+      stops being a line in someone else&rsquo;s ledger &mdash; you hold the token in your
+      own wallet and you can move it.
     </p>
 
     <div class="pillars">
@@ -816,6 +817,18 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
           decided after the fact.
         </p>
       </article>
+
+      <article class="pillar">
+        <span class="pillar-mark" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19"/><path d="M17 15h1.5"/></svg>
+        </span>
+        <h3>Held in your own wallet</h3>
+        <p>
+          Every series is issued as a transferable token. The position is yours
+          to custody and yours to send &mdash; not an entry in an account you have
+          to ask permission to leave.
+        </p>
+      </article>
     </div>
 
     <div class="mech">
@@ -824,22 +837,27 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
         <div class="mech-step">
           <span class="mech-n">01</span>
           <dt>Issue</dt>
-          <dd>A series is issued at a fixed price against a named reference, under its own Final Terms.</dd>
+          <dd>A series is minted as a token at a fixed price against a named reference, under its own Final Terms.</dd>
         </div>
         <div class="mech-step">
           <span class="mech-n">02</span>
           <dt>Track</dt>
-          <dd>The certificate follows the reference. The closer the barrier sits, the more gearing it carries.</dd>
+          <dd>The token follows the reference. The closer the barrier sits, the more gearing it carries.</dd>
         </div>
         <div class="mech-step">
           <span class="mech-n">03</span>
+          <dt>Transfer</dt>
+          <dd>Send it to your own wallet, or on to another verified holder. The position travels with the token.</dd>
+        </div>
+        <div class="mech-step">
+          <span class="mech-n">04</span>
           <dt>Observe</dt>
           <dd>The barrier is monitored continuously by the calculation agent, including outside market hours.</dd>
         </div>
         <div class="mech-step">
-          <span class="mech-n">04</span>
+          <span class="mech-n">05</span>
           <dt>Settle</dt>
-          <dd>At knock-out or maturity the series settles in cash. Payment is final when made.</dd>
+          <dd>At knock-out or maturity the series settles in cash to the holder of record.</dd>
         </div>
       </dl>
     </div>
@@ -865,8 +883,9 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
   </header>
   <div class="dlg-body">
     <p class="dlg-lead">
-      Anduin issues knock-out certificates on liquid reference markets, at a
-      fixed issue price, with barriers monitored continuously.
+      Anduin issues knock-out certificates on liquid reference markets as
+      transferable tokens, at a fixed issue price, with barriers monitored
+      continuously.
     </p>
 
     <div class="empty">
@@ -915,6 +934,10 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
         <dd>Barriers are observed 24/7 by the calculation agent; knock-outs settle automatically, without discretion.</dd>
       </div>
       <div class="reg-row">
+        <dt>Token register</dt>
+        <dd>Each series exists as a token and the token contract is the register of holders. Transfers settle on-chain between wallets verified under Anduin&rsquo;s onboarding.</dd>
+      </div>
+      <div class="reg-row">
         <dt>Settlement</dt>
         <dd>Cash settlement is final when paid &mdash; no T+2 return windows, no withdrawal gates.</dd>
       </div>
@@ -929,7 +952,7 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 </dialog>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FinancialService","name":"Anduin Issuance (JE) Limited","description":"Issuance of leveraged financial products \u2014 knock-out certificates referencing liquid markets. Base prospectus under review."}
+{"@context":"https://schema.org","@type":"FinancialService","name":"Anduin Issuance (JE) Limited","description":"Issuance of leveraged financial products as transferable tokens \u2014 knock-out certificates referencing liquid markets, held in the investor's own wallet. Base prospectus under review."}
 </script>
 
 <script>
