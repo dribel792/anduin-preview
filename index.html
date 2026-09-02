@@ -629,46 +629,69 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
   color: rgba(196, 186, 238, 0.9);
 }
 
-.mech {
-  margin-top: clamp(38px, 4.5vw, 56px);
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 2px 28px;
+  margin-top: clamp(40px, 5vw, 60px);
   border-top: 1px solid rgba(158, 148, 214, 0.14);
 }
-.mech-head {
-  margin: 0;
-  padding: 22px 0 6px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(226, 232, 244, 0.42);
-}
-.mech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
-  gap: 2px 26px;
-  margin: 0;
-  padding: 10px 0 0;
-}
-.mech-step { padding: 16px 0 18px; border-top: 1px solid rgba(158, 148, 214, 0.09); }
-.mech-n {
+.stat { padding: 24px 0 22px; border-bottom: 1px solid rgba(158, 148, 214, 0.09); }
+.stat-n {
   display: block;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(196, 186, 238, 0.7);
-  margin-bottom: 7px;
-}
-.mech-step dt {
-  font-size: 13.5px;
-  font-weight: 600;
+  font-family: Italiana, Didot, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(34px, 3.6vw, 46px);
+  line-height: 1;
   letter-spacing: 0.01em;
-  margin-bottom: 5px;
+  color: #f7f9fd;
 }
-.mech-step dd {
-  margin: 0;
+.stat-l {
+  display: block;
+  margin-top: 11px;
   font-size: 12.5px;
-  line-height: 1.62;
-  color: rgba(226, 232, 244, 0.58);
+  line-height: 1.5;
+  color: rgba(226, 232, 244, 0.66);
+}
+.stat-s {
+  display: block;
+  margin-top: 7px;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 244, 0.34);
+}
+
+.closing {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(18px, 3vw, 44px);
+  margin-top: clamp(40px, 5vw, 62px);
+  padding: clamp(26px, 3.2vw, 38px) clamp(24px, 3vw, 36px);
+  border-radius: 18px;
+  border: 1px solid rgba(158, 148, 214, 0.18);
+  background: linear-gradient(135deg, rgba(20, 24, 42, 0.75), rgba(9, 12, 22, 0.6));
+}
+.closing h3 {
+  margin: 0;
+  font-family: Italiana, Didot, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.16;
+  letter-spacing: 0.012em;
+  color: #f7f9fd;
+}
+.closing p {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.68;
+  color: rgba(226, 232, 244, 0.68);
+}
+.closing p:last-child { margin-bottom: 0; }
+.closing strong { color: rgba(243, 246, 251, 0.92); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .closing { grid-template-columns: 1fr; }
 }
 
 .status-note {
@@ -771,95 +794,93 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 <!-- ---------------------------- what we issue -------------------------- -->
 <section class="explain" id="product">
   <div class="explain-inner">
-    <p class="eyebrow">Leverage Product Issuance</p>
-    <h2>Leverage, issued as a transferable token.</h2>
+    <p class="eyebrow">The next phase</p>
+    <h2>TradFi and DeFi are converging on one rail.</h2>
     <p class="explain-lead">
-      Anduin issues knock-out certificates as tokens: securities that give geared
-      exposure to a reference market, with the most you can lose fixed at the
-      amount you paid. Every series is issued on-chain, so a derivative position
-      stops being a line in someone else&rsquo;s ledger &mdash; you hold the token in your
-      own wallet and you can move it.
+      For a decade the two systems ran in parallel: one held the assets and the
+      legal certainty, the other held the settlement rail. Tokenisation is what
+      finally joins them &mdash; and the assets have started to move.
     </p>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-n tnum">$38.7B</span>
+        <span class="stat-l">Real-world assets held on-chain, excluding stablecoins</span>
+        <span class="stat-s">RWA.xyz &middot; 1 Sep 2026</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n tnum">3&times;</span>
+        <span class="stat-l">Roughly the growth in on-chain RWA value over the last twelve months</span>
+        <span class="stat-s">$11.8B &rarr; $33.5B, mid-2025 to mid-2026</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n tnum">$303B</span>
+        <span class="stat-l">Stablecoins outstanding &mdash; the settlement layer already exists</span>
+        <span class="stat-s">RWA.xyz &middot; 1 Sep 2026</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n tnum">$18.9T</span>
+        <span class="stat-l">Projected tokenised assets by 2033, base case of a $12&ndash;23T range</span>
+        <span class="stat-s">BCG &amp; Ripple &middot; 2025</span>
+      </div>
+    </div>
 
     <div class="pillars">
       <article class="pillar">
         <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h7a5 5 0 0 1 5 5v3"/><path d="M20 16h-7a5 5 0 0 1-5-5V8"/><path d="m17 13 3 3-3 3"/><path d="M7 11 4 8l3-3"/></svg>
         </span>
-        <h3>Leverage without a margin account</h3>
+        <h3>Tokenisation is the bridge</h3>
         <p>
-          Exposure is delivered inside a security, not a margin position.
-          Nothing to post, nothing to top up, no margin call and no liquidation
-          engine deciding when you are out.
+          DeFi solved settlement: instant, final, open all hours. TradFi holds
+          the assets, the disclosure regime and the legal certainty. A token is
+          simply the format in which the second can travel on the first.
         </p>
       </article>
 
       <article class="pillar">
         <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M12 4v9"/><path d="m8 9.5 4 4 4-4"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="m5 15 4-5 4 3 6-8"/><path d="M15 5h4v4"/></svg>
         </span>
-        <h3>One published barrier</h3>
+        <h3>RWAs open the next adoption phase</h3>
         <p>
-          Each certificate names a barrier level up front. If the reference
-          reaches it, the certificate knocks out and settles in cash. That is
-          the entire downside &mdash; it cannot run past what you put in.
+          The first cycles were crypto-native and crypto-owned. The next one runs
+          on real assets, real yield and real disclosure &mdash; which is what brings
+          institutions, and their balance sheets, on-chain for the first time.
         </p>
       </article>
 
       <article class="pillar">
         <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M4 8h16"/><path d="M6 8v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/></svg>
         </span>
-        <h3>Terms fixed before issue</h3>
+        <h3>The missing layer is structure</h3>
         <p>
-          Reference, barrier, costs and risk scenarios are set in the prospectus
-          and the Final Terms of each series. Nothing about the payout is
-          decided after the fact.
-        </p>
-      </article>
-
-      <article class="pillar">
-        <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19"/><path d="M17 15h1.5"/></svg>
-        </span>
-        <h3>Held in your own wallet</h3>
-        <p>
-          Every series is issued as a transferable token. The position is yours
-          to custody and yours to send &mdash; not an entry in an account you have
-          to ask permission to leave.
+          Roughly four-fifths of everything tokenised so far is Treasuries and
+          cash equivalents. Nobody has brought the layer above it &mdash; leveraged
+          and structured payoffs &mdash; on-chain under a prospectus.
         </p>
       </article>
     </div>
 
-    <div class="mech">
-      <h3 class="mech-head">How a certificate runs</h3>
-      <dl class="mech-grid">
-        <div class="mech-step">
-          <span class="mech-n">01</span>
-          <dt>Issue</dt>
-          <dd>A series is minted as a token at a fixed price against a named reference, under its own Final Terms.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">02</span>
-          <dt>Track</dt>
-          <dd>The token follows the reference. The closer the barrier sits, the more gearing it carries.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">03</span>
-          <dt>Transfer</dt>
-          <dd>Send it to your own wallet, or on to another verified holder. The position travels with the token.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">04</span>
-          <dt>Observe</dt>
-          <dd>The barrier is monitored continuously by the calculation agent, including outside market hours.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">05</span>
-          <dt>Settle</dt>
-          <dd>At knock-out or maturity the series settles in cash to the holder of record.</dd>
-        </div>
-      </dl>
+    <div class="closing">
+      <h3>Anduin is built for that layer.</h3>
+      <div>
+        <p>
+          Tokenised money-market funds proved the rail works. The harder half of
+          capital markets &mdash; the leveraged and structured products that European
+          investors already hold hundreds of billions of &mdash; has not yet made the
+          crossing, because it needs an issuer, an approved prospectus and a
+          calculation agent, not just a smart contract.
+        </p>
+        <p>
+          Anduin is being built as that issuer: <strong>regulated leverage
+          products, issued as transferable tokens</strong>, with the terms fixed
+          in documentation before anything is sold. Same instrument a European
+          bank has issued for thirty years &mdash; delivered on the rail the next
+          phase will actually run on.
+        </p>
+      </div>
     </div>
 
     <div class="status-note">
