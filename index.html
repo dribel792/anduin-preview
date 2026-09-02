@@ -14,7 +14,6 @@
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
 
 body {
   background: #06080f;
@@ -486,37 +485,6 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .btn-ghost:hover { background: rgba(243, 246, 251, 0.08); }
 
 
-/* ------------------------- hero scroll cue --------------------------- */
-
-.scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 8px;
-  transform: translateX(-50%);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(233, 239, 248, 0.55);
-  transition: color 0.22s ease;
-  animation: rise 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) both 0.7s;
-}
-.scroll-cue:hover { color: rgba(243, 246, 251, 0.92); }
-.scroll-cue svg { animation: nudge 2.6s ease-in-out infinite; }
-@keyframes nudge {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(4px); }
-}
-
-@media (max-height: 680px) {
-  .scroll-cue { display: none; }
-}
 
 /* --------------------------- dialog empty state ---------------------- */
 
@@ -552,148 +520,10 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
   color: rgba(226, 232, 244, 0.55);
 }
 
-/* --------------------------- product section ------------------------- */
-
-.explain {
-  position: relative;
-  background: #05070d;
-  border-top: 1px solid rgba(158, 148, 214, 0.14);
-  padding: clamp(64px, 9vw, 116px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 92px);
-}
-
-.explain-inner { max-width: 1080px; margin: 0 auto; }
-
-.eyebrow {
-  margin: 0 0 18px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(196, 186, 238, 0.8);
-}
-
-.explain h2 {
-  margin: 0;
-  max-width: 18ch;
-  font-family: Italiana, Didot, Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(30px, 4vw, 50px);
-  line-height: 1.12;
-  letter-spacing: 0.012em;
-  color: #f7f9fd;
-}
-
-.explain-lead {
-  margin: 20px 0 0;
-  max-width: 62ch;
-  font-size: clamp(14px, 1.15vw, 16.5px);
-  line-height: 1.68;
-  color: rgba(226, 232, 244, 0.74);
-}
-
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
-  gap: 14px;
-  margin-top: clamp(38px, 4.5vw, 56px);
-}
-
-.pillar {
-  padding: 24px 22px 26px;
-  border-radius: 16px;
-  border: 1px solid rgba(158, 148, 214, 0.16);
-  background: linear-gradient(180deg, rgba(16, 20, 35, 0.7), rgba(9, 12, 22, 0.7));
-}
-.pillar h3 {
-  margin: 0 0 9px;
-  font-size: 14.5px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: #f3f6fb;
-}
-.pillar p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.65;
-  color: rgba(226, 232, 244, 0.62);
-}
-.pillar-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  margin-bottom: 15px;
-  border-radius: 9px;
-  border: 1px solid rgba(158, 148, 214, 0.24);
-  color: rgba(196, 186, 238, 0.9);
-}
-
-.mech {
-  margin-top: clamp(38px, 4.5vw, 56px);
-  border-top: 1px solid rgba(158, 148, 214, 0.14);
-}
-.mech-head {
-  margin: 0;
-  padding: 22px 0 6px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(226, 232, 244, 0.42);
-}
-.mech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
-  gap: 2px 26px;
-  margin: 0;
-  padding: 10px 0 0;
-}
-.mech-step { padding: 16px 0 18px; border-top: 1px solid rgba(158, 148, 214, 0.09); }
-.mech-n {
-  display: block;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(196, 186, 238, 0.7);
-  margin-bottom: 7px;
-}
-.mech-step dt {
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  margin-bottom: 5px;
-}
-.mech-step dd {
-  margin: 0;
-  font-size: 12.5px;
-  line-height: 1.62;
-  color: rgba(226, 232, 244, 0.58);
-}
-
-.status-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  margin-top: clamp(38px, 4.5vw, 54px);
-  padding: 16px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(229, 180, 102, 0.22);
-  background: rgba(229, 180, 102, 0.06);
-}
-.status-note svg { flex: none; margin-top: 1px; color: rgba(229, 180, 102, 0.9); }
-.status-note p {
-  margin: 0;
-  font-size: 12.5px;
-  line-height: 1.62;
-  color: rgba(233, 226, 210, 0.78);
-}
-
 /* --------------------------- reduced motion -------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .backdrop, .watermark, .tagline, .cookie, .tick-dot, .scroll-cue, .scroll-cue svg { animation: none !important; }
-  html { scroll-behavior: auto; }
+  .backdrop, .watermark, .tagline, .cookie, .tick-dot { animation: none !important; }
   dialog.dlg[open] { animation: none; }
 }
 </style>
@@ -734,10 +564,6 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
       <h1 class="hero-line">Finance, converged.</h1>
       <p class="hero-sub">Anduin issues leveraged financial products as transferable tokens &mdash; a derivative position you hold in your own wallet.</p>
     </div>
-    <a class="scroll-cue" href="#product">
-      <span>What we issue</span>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v13"/><path d="m6 13 6 6 6-6"/></svg>
-    </a>
   </main>
 
   <footer class="footer">
@@ -767,111 +593,6 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
     </div>
   </div>
 </div>
-
-<!-- ---------------------------- what we issue -------------------------- -->
-<section class="explain" id="product">
-  <div class="explain-inner">
-    <p class="eyebrow">Leverage Product Issuance</p>
-    <h2>Leverage, issued as a transferable token.</h2>
-    <p class="explain-lead">
-      Anduin issues knock-out certificates as tokens: securities that give geared
-      exposure to a reference market, with the most you can lose fixed at the
-      amount you paid. Every series is issued on-chain, so a derivative position
-      stops being a line in someone else&rsquo;s ledger &mdash; you hold the token in your
-      own wallet and you can move it.
-    </p>
-
-    <div class="pillars">
-      <article class="pillar">
-        <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/></svg>
-        </span>
-        <h3>Leverage without a margin account</h3>
-        <p>
-          Exposure is delivered inside a security, not a margin position.
-          Nothing to post, nothing to top up, no margin call and no liquidation
-          engine deciding when you are out.
-        </p>
-      </article>
-
-      <article class="pillar">
-        <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M12 4v9"/><path d="m8 9.5 4 4 4-4"/></svg>
-        </span>
-        <h3>One published barrier</h3>
-        <p>
-          Each certificate names a barrier level up front. If the reference
-          reaches it, the certificate knocks out and settles in cash. That is
-          the entire downside &mdash; it cannot run past what you put in.
-        </p>
-      </article>
-
-      <article class="pillar">
-        <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6"/></svg>
-        </span>
-        <h3>Terms fixed before issue</h3>
-        <p>
-          Reference, barrier, costs and risk scenarios are set in the prospectus
-          and the Final Terms of each series. Nothing about the payout is
-          decided after the fact.
-        </p>
-      </article>
-
-      <article class="pillar">
-        <span class="pillar-mark" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19"/><path d="M17 15h1.5"/></svg>
-        </span>
-        <h3>Held in your own wallet</h3>
-        <p>
-          Every series is issued as a transferable token. The position is yours
-          to custody and yours to send &mdash; not an entry in an account you have
-          to ask permission to leave.
-        </p>
-      </article>
-    </div>
-
-    <div class="mech">
-      <h3 class="mech-head">How a certificate runs</h3>
-      <dl class="mech-grid">
-        <div class="mech-step">
-          <span class="mech-n">01</span>
-          <dt>Issue</dt>
-          <dd>A series is minted as a token at a fixed price against a named reference, under its own Final Terms.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">02</span>
-          <dt>Track</dt>
-          <dd>The token follows the reference. The closer the barrier sits, the more gearing it carries.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">03</span>
-          <dt>Transfer</dt>
-          <dd>Send it to your own wallet, or on to another verified holder. The position travels with the token.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">04</span>
-          <dt>Observe</dt>
-          <dd>The barrier is monitored continuously by the calculation agent, including outside market hours.</dd>
-        </div>
-        <div class="mech-step">
-          <span class="mech-n">05</span>
-          <dt>Settle</dt>
-          <dd>At knock-out or maturity the series settles in cash to the holder of record.</dd>
-        </div>
-      </dl>
-    </div>
-
-    <div class="status-note">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5h.01"/></svg>
-      <p>
-        Anduin&rsquo;s base prospectus is under review. No series are open for
-        subscription and nothing on this page is an offer, a solicitation or
-        investment advice.
-      </p>
-    </div>
-  </div>
-</section>
 
 <!-- ------------------------------- Series ------------------------------ -->
 <dialog class="dlg" id="dlg-series" aria-labelledby="dlg-series-title">
