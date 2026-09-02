@@ -257,13 +257,13 @@ a { color: inherit; text-decoration: none; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(196, 186, 238, 0.9);
+  background: #43d69e;
   animation: pulse 2.4s ease-out infinite;
 }
 @keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(196, 186, 238, 0.35); }
-  70%  { box-shadow: 0 0 0 7px rgba(196, 186, 238, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(196, 186, 238, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(67, 214, 158, 0.45); }
+  70%  { box-shadow: 0 0 0 7px rgba(67, 214, 158, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(67, 214, 158, 0); }
 }
 .tick-tag {
   font-family: "Inter", Inter, sans-serif;
@@ -271,7 +271,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(196, 186, 238, 0.92);
+  color: #8fe3c0;
 }
 .tick-item { display: inline-flex; align-items: baseline; gap: 6px; }
 .tick-sym { color: rgba(233, 239, 248, 0.55); font-size: 10.5px; }
@@ -742,9 +742,9 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
   <footer class="footer">
     <p class="foot-copy">© 2026 Anduin Issuance (JE) Limited</p>
-    <div class="ticker" role="status" aria-label="Indicative reference prices — simulated, not a quote">
+    <div class="ticker" role="status" aria-label="Reference spot prices from Kraken — not an Anduin quote" hidden>
       <span class="tick-dot" aria-hidden="true"></span>
-      <span class="tick-tag">Indicative</span>
+      <span class="tick-tag">Spot</span>
       <span class="tick-item"><span class="tick-sym">BTC</span><span class="tick-px tnum" id="tick-btc">—</span><span class="tick-chg up tnum" id="chg-btc"></span></span>
       <span class="tick-item"><span class="tick-sym">ETH</span><span class="tick-px tnum" id="tick-eth">—</span><span class="tick-chg up tnum" id="chg-eth"></span></span>
       <span class="tick-item"><span class="tick-sym">SOL</span><span class="tick-px tnum" id="tick-sol">—</span><span class="tick-chg up tnum" id="chg-sol"></span></span>
@@ -881,8 +881,8 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
     </div>
 
     <p class="dlg-fine">
-      Reference prices shown elsewhere on this site are indicative and simulated
-      until the calculation agent&rsquo;s feed is live. Not a quote, not an offer.
+      Spot prices shown on this site are third-party reference data for
+      orientation only. They are not Anduin quotes and not an offer.
     </p>
   </div>
 </dialog>
@@ -937,52 +937,95 @@ dialog.dlg[open] { animation: dlg-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
   "use strict";
 
   /* ------------------------------ ticker ------------------------------ */
-  /* Standalone preview: no backend. The three reference prices follow a
-     gentle local random walk purely so the page is not static. Simulated
-     and indicative only — not quotes. */
+  /* Live spot reference prices. Primary source Kraken public ticker (one
+     request covers all three, and carries the 24h open so the change can be
+     derived); Coinbase spot is the fallback. If neither answers we hide the
+     box rather than display a number we cannot stand behind. */
 
-  var mkt = {
-    BTC: { price: 63650.54, change: 0.11 },
-    ETH: { price: 3095.42, change: 0.03 },
-    SOL: { price: 147.85, change: -0.26 }
-  };
+  var PAIRS = { XXBTZUSD: "BTC", XETHZUSD: "ETH", SOLUSD: "SOL" };
+  var KRAKEN = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD,ETHUSD,SOLUSD";
+  var COINBASE = "https://api.coinbase.com/v2/prices/";
+
+  var box = document.querySelector(".ticker");
+  var everLoaded = false;
 
   function fmt(p) {
-    return p >= 100
+    return p >= 1
       ? p.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
       : p.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
   }
 
   function setTxt(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
 
-  function render() {
-    ["BTC", "ETH", "SOL"].forEach(function (sym) {
-      var q = mkt[sym];
-      var low = sym.toLowerCase();
-      setTxt("tick-" + low, fmt(q.price));
-      var chg = document.getElementById("chg-" + low);
-      if (chg) {
-        var up = q.change >= 0;
-        chg.className = "tick-chg " + (up ? "up" : "down") + " tnum";
-        chg.textContent = (up ? "+" : "\u2212") + Math.abs(q.change).toFixed(2) + "%";
-      }
+  function paint(sym, price, change) {
+    var low = sym.toLowerCase();
+    setTxt("tick-" + low, fmt(price));
+    var chg = document.getElementById("chg-" + low);
+    if (!chg) return;
+    if (change === null || !isFinite(change)) {
+      chg.textContent = "";
+      return;
+    }
+    var up = change >= 0;
+    chg.className = "tick-chg " + (up ? "up" : "down") + " tnum";
+    chg.textContent = (up ? "+" : "\u2212") + Math.abs(change).toFixed(2) + "%";
+  }
+
+  function reveal() {
+    everLoaded = true;
+    if (box) box.hidden = false;
+  }
+
+  function fromKraken() {
+    return fetch(KRAKEN, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("kraken " + r.status); return r.json(); })
+      .then(function (body) {
+        if (!body || !body.result || (body.error && body.error.length)) throw new Error("kraken payload");
+        var hit = 0;
+        Object.keys(PAIRS).forEach(function (key) {
+          var row = body.result[key];
+          if (!row) return;
+          var last = parseFloat(row.c[0]);
+          var open = parseFloat(row.o);
+          if (!isFinite(last)) return;
+          var change = isFinite(open) && open > 0 ? ((last - open) / open) * 100 : null;
+          paint(PAIRS[key], last, change);
+          hit++;
+        });
+        if (!hit) throw new Error("kraken empty");
+        reveal();
+      });
+  }
+
+  function fromCoinbase() {
+    var syms = ["BTC", "ETH", "SOL"];
+    return Promise.all(syms.map(function (sym) {
+      return fetch(COINBASE + sym + "-USD/spot", { cache: "no-store" })
+        .then(function (r) { if (!r.ok) throw new Error("cb " + r.status); return r.json(); })
+        .then(function (body) {
+          var px = parseFloat(body && body.data && body.data.amount);
+          if (!isFinite(px)) throw new Error("cb payload");
+          return { sym: sym, px: px };
+        });
+    })).then(function (rows) {
+      rows.forEach(function (row) { paint(row.sym, row.px, null); });
+      reveal();
     });
   }
 
-  function step() {
-    Object.keys(mkt).forEach(function (sym) {
-      var q = mkt[sym];
-      var drift = (Math.random() - 0.5) * 2;            // -1..1
-      q.price = q.price * (1 + drift * 0.00035);
-      q.change = q.change + drift * 0.008;
-      if (q.change > 1.2) q.change = 1.2;
-      if (q.change < -1.2) q.change = -1.2;
-    });
-    render();
+  function refresh() {
+    fromKraken()
+      .catch(fromCoinbase)
+      .catch(function () {
+        /* Both sources down. Never fall back to invented numbers: if we have
+           shown a price before, leave the last good one in place; if we never
+           got one, the box stays hidden. */
+        if (!everLoaded && box) box.hidden = true;
+      });
   }
 
-  render();
-  setInterval(step, 2800);
+  refresh();
+  setInterval(refresh, 20000);
 
   /* ------------------------------ dialogs ----------------------------- */
 
